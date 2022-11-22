@@ -60,6 +60,7 @@ export interface PaginateConfig<T> {
     withDeleted?: boolean
     relativePath?: boolean
     origin?: string
+    rawResults?: boolean
 }
 
 export enum FilterOperator {
@@ -358,9 +359,15 @@ export async function paginate<T extends ObjectLiteral>(
                 }
             })
         )
+    };
+
+    if (config.rawResults) {
+        items = await queryBuilder.getRawMany();
+        totalItems = await queryBuilder.getCount();
+    } else {
+        [items, totalItems] = await queryBuilder.getManyAndCount()
     }
 
-    ;[items, totalItems] = await queryBuilder.getManyAndCount()
 
     let totalPages = totalItems / limit
     if (totalItems % limit) totalPages = Math.ceil(totalPages)
