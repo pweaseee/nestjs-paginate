@@ -1,14 +1,14 @@
 {
-  "name": "nestjs-paginate",
-  "version": "0.1.0",
-  "author": "Philipp Petzold <ppetzold@protonmail.com>",
+  "name": "@pwease/nestjs-paginate",
+  "version": "0.1.3",
+  "author": "Anatoly <anatoly@turgenev.app>",
   "license": "MIT",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
-  "description": "Pagination and filtering helper method for TypeORM repostiories or query builders using Nest.js framework.",
+  "description": "Pagination and filtering helper method for TypeORM repostiories or query builders using Nest.js framework. (Fork of https://www.npmjs.com/package/nestjs-paginate)",
   "keywords": [
     "nestjs",
     "typeorm",

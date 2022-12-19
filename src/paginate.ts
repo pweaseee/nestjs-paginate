@@ -242,12 +242,23 @@ export async function paginate<T extends ObjectLiteral>(
     let queryBuilder: SelectQueryBuilder<T>
 
     if (repo instanceof Repository) {
-        queryBuilder = repo
-            .createQueryBuilder('e')
-            .take(limit)
-            .skip((page - 1) * limit)
+        if (config.rawResults) {
+            queryBuilder = repo
+                .createQueryBuilder('e')
+                .limit(limit)
+                .offset((page - 1) * limit);    
+        } else {
+            queryBuilder = repo
+                .createQueryBuilder('e')
+                .take(limit)
+                .skip((page - 1) * limit);
+        }
     } else {
-        queryBuilder = repo.take(limit).skip((page - 1) * limit)
+        if (config.rawResults) {
+            queryBuilder = repo.limit(limit).offset((page - 1) * limit);
+        } else {
+            queryBuilder = repo.take(limit).skip((page - 1) * limit);
+        }
     }
 
     if (config.relations?.length) {
